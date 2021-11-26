@@ -6,6 +6,17 @@ typedef struct uint1024_s
     uint32_t pcs[32];
 } uint1024_t;
 
+uint1024_t from_uint(unsigned int x);
+uint1024_t add_op(uint1024_t x, uint1024_t y);
+uint1024_t subtr_op(uint1024_t x, uint1024_t y);
+void shift_left(uint1024_t *x);
+void shift_right(uint1024_t *x);
+uint1024_t mult_op(uint1024_t x, uint1024_t y);
+uint1024_t pow_op(uint1024_t x, uint1024_t y);
+void printf_value(uint1024_t x);
+void scanf_value(uint1024_t *x);
+void printf_bin(uint1024_t x);
+
 uint1024_t from_uint(unsigned int x)
 {
     uint1024_t result;
@@ -78,6 +89,29 @@ uint1024_t mult_op(uint1024_t x, uint1024_t y)
     return result;
 }
 
+uint1024_t pow_op(uint1024_t x, uint1024_t y)
+{
+    uint1024_t result = from_uint(1);
+    for (int i = 0; i < 1024; i++)
+    {
+        if ((y.pcs[31] & 1) == 1)
+        {
+            result = mult_op(result, x);
+        }
+        shift_right(&y);
+        if (y.pcs[31] == 0)
+        {
+            for (int j = 0; j < 32; j++)
+            {
+                shift_right(&y);
+                ++i;
+            }
+        }
+        x = mult_op(x, x);
+    }
+    return result;
+}
+
 void printf_value(uint1024_t x)
 {
     // DOUBLE DABBLE
@@ -109,11 +143,7 @@ void printf_value(uint1024_t x)
         results[154] = (results[154] << 1) + (x.pcs[0] >> 31);
 
         // SHIFT UINT1024
-        for (int shiftIndex = 0; shiftIndex < 31; shiftIndex++)
-        {
-            x.pcs[shiftIndex] = (x.pcs[shiftIndex] << 1) + (x.pcs[shiftIndex + 1] >> 31);
-        }
-        x.pcs[31] <<= 1;
+        shift_left(&x);
     }
 
     uint8_t zeroEnded = 0;
@@ -164,6 +194,7 @@ void printf_bin(uint1024_t x)
             printf("%c", ((x.pcs[pcsIndex] >> bitIndex) & 0b00000001) ? '1' : '0');
         }
     }
+    printf("\n");
 }
 
 int main(int argc, char **argv)
@@ -171,21 +202,26 @@ int main(int argc, char **argv)
     printf("scanf_value(a):\n");
     uint1024_t a;
     scanf_value(&a);
+    uint1024_t b = from_uint(10);
+    printf("from_uint(b): ");
+    printf_value(b);
 
-    printf("from_uint(b): 1000\n");
-    uint1024_t b = from_uint(1000);
     // MULT
-    uint1024_t mult = mult_op(a,b);
+    uint1024_t mult = mult_op(a, b);
     printf("mult_op:\n");
     printf_value(mult);
 
+    uint1024_t pow = pow_op(a, b);
+    printf("pow_op:\n");
+    printf_value(pow);
+
     // SUBTR
-    uint1024_t subtr = subtr_op(a,b);
+    uint1024_t subtr = subtr_op(a, b);
     printf("subtr_op:\n");
     printf_value(subtr);
 
     // ADD
-    uint1024_t add = add_op(a,b);
+    uint1024_t add = add_op(a, b);
     printf("add_op:\n");
     printf_value(add);
 

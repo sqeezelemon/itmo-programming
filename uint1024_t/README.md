@@ -20,6 +20,7 @@
 * `uint1024_t add_op(uint1024_t x, uint1024_t y)` - сложение
 * `uint1024_t subtr_op(uint1024_t x, uint1024_t y)` - вычетание.
 * `uint1024_t mult_op(uint1024_t x, uint1024_t y)` - умножение.
+* `uint1024_t pow_op(uint1024_t x, uint1024_t y)` - возведение в степень.
 * `void printf_value(uint1024_t x)` - вывод в стандартный поток вывода.
 * `void printf_bin(uint1024_t x)` - вывод в стандартный поток вывода в двоичном представлении.
 * `void scanf_value(uint1024_t* x)` - чтение из стандартного потока ввода.
