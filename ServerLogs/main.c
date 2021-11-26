@@ -149,9 +149,9 @@ int main(int argc, char **argv) {
         // Time Zone
         int lineTimeZone = ((lineBuffer[lineIndex + 1] - '0') * 10 + (lineBuffer[lineIndex + 2] - '0')) * 3600 + ((lineBuffer[lineIndex + 3] - '0') * 10 + (lineBuffer[lineIndex + 4] - '0')) * 60;
         if (lineBuffer[lineIndex] == '+') {
-            lineTimeStamp += lineTimeZone;
-        } else if (lineBuffer[lineIndex] == '-') {
             lineTimeStamp -= lineTimeZone;
+        } else if (lineBuffer[lineIndex] == '-') {
+            lineTimeStamp += lineTimeZone;
         }
 
         // GET TO ERROR CODE
