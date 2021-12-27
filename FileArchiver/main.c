@@ -196,10 +196,6 @@ void encodeItem(FILE* archive, char* filename) {
 
     // 1. Get file byte stats
     FILE* file = fopen(filename, "rb");
-    // if (file == NULL) {
-    //     printf(BOLD RED "ERROR:" RESET ENDBOLD " Unable to read file at path %s\n", filename);
-    //     return;
-    // }
     int byteStats[256];
     memset(byteStats, 0, sizeof(int)*256);
     uint8_t byteBuffer;
@@ -438,9 +434,7 @@ void listItem(FILE* archive) {
     // Skip encoded data
     uint64_t encodedSize;
     fread(&encodedSize, sizeof(uint64_t), 1, archive);
-    for (int i = 0; i < encodedSize; i++) {
-        getc(archive);
-    }
+    fseek(archive, encodedSize, SEEK_CUR);
 }
 
 typedef enum ProgramMode_e {
@@ -478,6 +472,7 @@ FILE1 FILE2...  File to be archived\n\
                 archivePathIndex = i;
             } else {
                 printf(BOLD RED "ERROR:" RESET ENDBOLD " Argument --file at position %d doesn't provide a filepath\n", i);
+                return 0;
             }
         } else if (strcmp("--list", argv[i]) == 0) {
             mode = LIST;
@@ -508,7 +503,7 @@ FILE1 FILE2...  File to be archived\n\
                 fileAmount += isFileAtIndex[i];
             }
             if (fileAmount == 0) {
-                printf(BOLD RED "ERROR:" RESET ENDBOLD " No files were provided\n %s\n");
+                printf(BOLD RED "ERROR:" RESET ENDBOLD " No files were provided\n");
                 return 0;
             }
             archive = fopen(argv[archivePathIndex], "wb");
