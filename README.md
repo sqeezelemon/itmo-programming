@@ -7,5 +7,9 @@
 6. [Архиватор файлов](FileArchiver)
 
 # 2 Семестр (C++)
-1. [Геометрия и полином](oop-math)
-2. [Курсы валют](Currency)
+1. [ООП, Классы](oop-math)
+2. [Использование внешних библиотек](Currency)
+3. [STL Контейнеры](STL)
+4. [Кубик Рубика](RubiksCube)
+5. [Allocator](Allocator)
+6. [Compile-Time Programming](constexpr-polynomial)
