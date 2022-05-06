@@ -3,6 +3,12 @@
 #include <cassert>
 #include <memory>
 
+#define CIRCULAR_BUFFER_DEBUG 1
+
+#if CIRCULAR_BUFFER_DEBUG
+#include <iostream>
+#endif
+
 namespace stl {
 
 namespace cb_meta {
@@ -508,6 +514,17 @@ public:
         reallocate_buf(size());
         return b_begin;
     }
+
+    //////// DEBUG
+    #if CIRCULAR_BUFFER_DEBUG
+    // Prints the memory representation of the circular buffer
+    void print_mem() {
+        for (pointer p = b_begin; p < b_end; p++) {
+            std::cout << *p << ' ';
+        }
+        std::cout << std::endl;
+    }
+    #endif
 };
 
 }
