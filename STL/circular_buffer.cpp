@@ -511,7 +511,7 @@ public:
     }
 
     pointer linearize() {
-        reallocate_buf(size());
+        reallocate_buf(capacity());
         return b_begin;
     }
 
