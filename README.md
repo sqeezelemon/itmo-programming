@@ -15,10 +15,10 @@
 6. [Compile-Time Programming](Sem2/constexpr-polynomial)
 
 # 3 Семестр (C#)
-0. ISU
-1. Shops
-2. ISU.Extra
-3. Backups
-4. Banks
-5. BackupsExtra
-6. Система обработки сообщений
+0. [ISU](Sem3/Lab0)
+1. [Shops](Sem3/Lab1)
+2. [ISU.Extra](Sem3/Lab2)
+3. [Backups](Sem3/Lab3)
+4. [Banks](Sem3/Lab4)
+5. [BackupsExtra](Sem3/Lab5)
+6. [Система обработки сообщений](Sem3/Lab6)

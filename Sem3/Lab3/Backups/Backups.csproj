@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <WarningLevel>5</WarningLevel>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Utilities\" />
+      <None Remove="Utilities\Interface\" />
+      <None Remove="Utilities\DiskRepository\" />
+      <None Remove="Exceptions\" />
+      <None Remove="Storage\" />
+      <None Remove="Backup\" />
+      <None Remove="Utilities\MemoryRepository\" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Utilities\" />
+      <Folder Include="Utilities\DiskRepository\" />
+      <Folder Include="Exceptions\" />
+      <Folder Include="Storage\" />
+      <Folder Include="Backup\" />
+      <Folder Include="Utilities\MemoryRepository\" />
+    </ItemGroup>
+</Project>
